@@ -2,15 +2,15 @@ language: cpp
 
 matrix:
   include:
-#    - os: linux
-#      dist: trusty
-#      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
-#      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
+    - os: linux
+      dist: trusty
+      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
+      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
     - os: linux
       dist: trusty
       addons: { apt: { packages: [g++-6, lcov], sources: [ubuntu-toolchain-r-test] } }
-      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Coverage
+      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Coverage GCOV=gcov-6
 
 before_install:
   - eval "${MATRIX_EVAL}"
@@ -22,14 +22,7 @@ script:
   - ctest -VV .
 
 after_success:
-  - if [ "$BUILD_TYPE" == "Coverage" ]; then
-  -   cd ${TRAVIS_BUILD_DIR}
-  -   alias lcov="lcov --gcov-tool $(which gcov-6)"
-  -   lcov -d . -c -o coverage.info
-  -   lcov -r coverage.info '/usr/*' 'test/*' 'libs/*' -o coverage.info
-  -   lcov -l coverage.info
-  -   bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
-  - fi
+  - ci/travis-coverage.sh
 
 notifications:
   email: false
