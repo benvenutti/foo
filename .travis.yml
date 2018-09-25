@@ -1,16 +1,16 @@
 language: cpp
 
 matrix:
-  include:
-    - os: linux
-      dist: trusty
-      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
-      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
+#  include:
+#    - os: linux
+#      dist: trusty
+#      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
+#      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
     - os: linux
       dist: trusty
-      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
-      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Debug
+      addons: { apt: { packages: [g++-6, lcov], sources: [ubuntu-toolchain-r-test] } }
+      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Coverage
 
 before_install:
   - eval "${MATRIX_EVAL}"
@@ -20,6 +20,14 @@ script:
   - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
   - cmake --build .
   - ctest -VV .
+
+after_success:
+  - cd ${TRAVIS_BUILD_DIR}
+  - lcov --gcov-tool $(which gcov-6) --directory . --capture --output-file coverage.info
+  - lcov --gcov-tool $(which gcov-6) --remove coverage.info '/usr/*' --output-file coverage.info
+  - lcov --gcov-tool $(which gcov-6) --remove coverage.info 'test/*' --output-file coverage.info
+  - lcov --gcov-tool $(which gcov-6) --list coverage.info
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 
 notifications:
   email: false
