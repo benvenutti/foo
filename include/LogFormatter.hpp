@@ -3,10 +3,12 @@
 
 #include <string>
 
-namespace foo {
+namespace foo
+{
 
-namespace LogFormatter {
-  std::string getTimeStamp();
+namespace LogFormatter
+{
+std::string getTimeStamp();
 }
 
 } // namespace foo
