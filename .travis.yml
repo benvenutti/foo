@@ -22,7 +22,7 @@ script:
   - ctest -VV .
 
 after_success:
-  - ci/travis-coverage.sh
+  - ${TRAVIS_BUILD_DIR}/ci/travis-coverage.sh
 
 notifications:
   email: false
