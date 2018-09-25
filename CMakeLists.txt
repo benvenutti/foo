@@ -17,8 +17,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${dialect} ${warnings}")
 
 # dependencies
 include(GenerateExportHeader)
-include(AddCatch)
-include_directories(${CATCH_INCLUDE_DIR})
+
+add_library( catch2 INTERFACE )
+target_include_directories( catch2 INTERFACE libs/Catch2/single_include )
 
 # targets
 include_directories(include include/foo)
