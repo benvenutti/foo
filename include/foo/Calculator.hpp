@@ -3,19 +3,23 @@
 
 #include "FooExport.h"
 
-namespace foo {
+namespace foo
+{
 
-class FOO_EXPORT Calculator {
-  public:
-    static int add(const int a, const int b) {
-      return a + b;
+class FOO_EXPORT Calculator
+{
+public:
+    static int add( const int a, const int b )
+    {
+        return a + b;
     }
 
-    static int sub(const int a, const int b) {
-      return a - b;
+    static int sub( const int a, const int b )
+    {
+        return a - b;
     }
 };
 
-}
+} // namespace foo
 
 #endif

@@ -6,19 +6,21 @@
 
 #include "FooExport.h"
 
-namespace foo {
+namespace foo
+{
 
-class FOO_EXPORT FileLogger {
-  public:
-    FileLogger(std::ostream& output);
+class FOO_EXPORT FileLogger
+{
+public:
+    FileLogger( std::ostream& output );
     ~FileLogger();
 
-    void write(const std::string& log);
+    void write( const std::string& log );
 
-  private:
+private:
     std::ostream& output;
 };
 
-}
+} // namespace foo
 
 #endif
