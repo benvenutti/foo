@@ -56,6 +56,21 @@ matrix:
       addons: *clang4
       env: MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0" BUILD_TYPE=Debug
 
+    # -----------------------------------------------------------------------------------
+    # linux clang-7
+
+    - os: linux
+      dist: trusty
+      addons: &clang7 { apt: {
+        packages: [clang-7.0, libstdc++-6-dev] ,
+        sources: [ubuntu-toolchain-r-test, llvm-toolchain-trusty-7.0] } }
+      env: MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0" BUILD_TYPE=Release
+
+    - os: linux
+      dist: trusty
+      addons: *clang7
+      env: MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0" BUILD_TYPE=Debug
+
 before_install:
   - eval "${MATRIX_EVAL}"
 
