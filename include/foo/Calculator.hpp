@@ -11,6 +11,11 @@ class FOO_EXPORT Calculator
 public:
     static int add( const int a, const int b )
     {
+    	if ( a == 7 )
+    	{
+    		return a + b; // TODO remove later, this is only for a coverage test
+    	}
+
         return a + b;
     }
 

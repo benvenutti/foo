@@ -10,6 +10,11 @@ else ()
     set(dialect "-std=c++14")
 endif ()
 
+if(CMAKE_BUILD_TYPE MATCHES "Coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 --coverage")
+    set(CMAKE_BUILD_TYPE Debug FORCE)
+endif()
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${dialect} ${warnings}")
 
 # dependencies
