@@ -9,19 +9,19 @@ configuration:
   - Release
 
 init:
-  - cmd: cmake --version
-  - cmd: msbuild /version
+  - cmake --version
+  - msbuild /version
 
 install:
   - git submodule update --init --recursive
 
 build_script:
-  - cmd: md build
-  - cmd: cd build
-  - cmd: if "%platform%"=="Win32" set CMAKE_GENERATOR_NAME=Visual Studio 14 2015
-  - cmd: if "%platform%"=="x64"   set CMAKE_GENERATOR_NAME=Visual Studio 14 2015 Win64
-  - cmd: cmake -G "%CMAKE_GENERATOR_NAME%" ..
-  - cmd: cmake --build . --config %configuration%
+  - md build
+  - cd build
+  - if "%platform%"=="Win32" set CMAKE_GENERATOR_NAME=Visual Studio 14 2015
+  - if "%platform%"=="x64"   set CMAKE_GENERATOR_NAME=Visual Studio 14 2015 Win64
+  - cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=%configuration% ..
+  - cmake --build . --config %configuration%
 
 test_script:
-  - cmd: ctest -C %configuration% -VV
+  - ctest -C %configuration% -VV
