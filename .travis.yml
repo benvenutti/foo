@@ -3,62 +3,23 @@ language: cpp
 matrix:
   include:
     - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-4.9
-      env: COMPILER=g++-4.9
+      dist: trusty
+      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
+      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
     - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-5
-      env: COMPILER=g++-5
-
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env: COMPILER=g++-6
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-      env: COMPILER=clang++
-
-    - os: osx
-      osx_image: xcode7.3
-      compiler: clang
-      env: COMPILER=clang
-
-    - os: osx
-      osx_image: xcode8
-      compiler: clang
-      env: COMPILER=clang
-
-sudo: required
-dist: trusty
+      dist: trusty
+      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
+      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Debug
 
 before_install:
-  - ci/travis-system-info.sh
-  - ci/travis-before-install.sh
+  - eval "${MATRIX_EVAL}"
 
 script:
-  - ci/travis-script.sh
+  - mkdir build && cd build
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
+  - cmake --build .
+  - ctest -VV .
 
 notifications:
   email: false
