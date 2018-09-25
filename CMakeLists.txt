@@ -11,8 +11,7 @@ else ()
 endif ()
 
 if(CMAKE_BUILD_TYPE MATCHES "Coverage")
-    message(STATUS "Coverage build...")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 --coverage")
     set(CMAKE_BUILD_TYPE Debug FORCE)
 endif()
 
