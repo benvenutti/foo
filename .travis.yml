@@ -22,14 +22,14 @@ script:
   - ctest -VV .
 
 after_success:
-  - cd ${TRAVIS_BUILD_DIR}
-  - ls
-  - pwd
-#  - lcov --gcov-tool $(which gcov-6) --directory . --capture --output-file coverage.info
-#  - lcov --gcov-tool $(which gcov-6) --remove coverage.info '/usr/*' --output-file coverage.info
-#  - lcov --gcov-tool $(which gcov-6) --remove coverage.info 'test/*' --output-file coverage.info
-#  - lcov --gcov-tool $(which gcov-6) --list coverage.info
-#  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+  - if [ "$BUILD_TYPE" == "Coverage" ]; then
+  -   cd ${TRAVIS_BUILD_DIR}
+  -   alias lcov="lcov --gcov-tool $(which gcov-6)"
+  -   lcov -d . -c -o coverage.info
+  -   lcov -r coverage.info '/usr/*' 'test/*' 'libs/*' -o coverage.info
+  -   lcov -l coverage.info
+  -   bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+  - fi
 
 notifications:
   email: false
