@@ -2,6 +2,8 @@
 
 if [ "$BUILD_TYPE" == "Coverage" ]; then
   cd ${TRAVIS_BUILD_DIR}
+  echo ${GCOV}
+  echo $GCOV
   alias lcov="lcov --gcov-tool $(which ${GCOV})"
   lcov -d . -c -o coverage.info
   lcov -r coverage.info '/usr/*' 'test/*' 'libs/*' -o coverage.info
