@@ -7,18 +7,24 @@ matrix:
 
     - os: osx
       osx_image: xcode10
-      env: MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
+      env:
+        - @osx_remove_oclint PRE_MATRIX_EVAL="brew cask uninstall oclint"
+        - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6"
+        - BUILD_TYPE=Release
 
     - os: osx
       osx_image: xcode10
-      env: MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Debug
+      env:
+        - *osx_remove_oclint
+        - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6"
+        - BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
     # linux gcc-6 with coverage
 
     - os: linux
       dist: trusty
-      addons: &gcc6 { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
+      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
     - os: linux
@@ -98,6 +104,7 @@ matrix:
       env: MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0" BUILD_TYPE=Debug
 
 before_install:
+  - eval "${PRE_MATRIX_EVAL}"
   - eval "${MATRIX_EVAL}"
 
 script:
