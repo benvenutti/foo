@@ -1,7 +1,7 @@
 language: cpp
 
 matrix:
-#  include:
+  include:
 #    - os: linux
 #      dist: trusty
 #      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
