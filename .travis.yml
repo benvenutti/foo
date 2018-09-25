@@ -41,6 +41,21 @@ matrix:
       addons: *gcc8
       env: MATRIX_EVAL="CC=gcc-8 && CXX=g++-8" BUILD_TYPE=Debug
 
+    # -----------------------------------------------------------------------------------
+    # linux clang-4
+
+    - os: linux
+      dist: trusty
+      addons: &clang4 { apt: {
+        packages: [clang-4.0, libstdc++-6-dev] ,
+        sources: [ubuntu-toolchain-r-test, llvm-toolchain-trusty-4.0] } }
+      env: MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0" BUILD_TYPE=Release
+
+    - os: linux
+      dist: trusty
+      addons: *clang4
+      env: MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0" BUILD_TYPE=Debug
+
 before_install:
   - eval "${MATRIX_EVAL}"
 
