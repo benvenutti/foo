@@ -3,6 +3,17 @@ language: cpp
 matrix:
   include:
     # -----------------------------------------------------------------------------------
+    # osx gcc-6
+
+    - os: osx
+      osx_image: xcode10
+      env: MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
+
+    - os: osx
+      osx_image: xcode10
+      env: MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Debug
+
+    # -----------------------------------------------------------------------------------
     # linux gcc-6 with coverage
 
     - os: linux
