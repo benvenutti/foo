@@ -2,10 +2,10 @@ language: cpp
 
 matrix:
   include:
-#    - os: linux
-#      dist: trusty
-#      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
-#      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
+    - os: linux
+      dist: trusty
+      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
+      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
     - os: linux
       dist: trusty
