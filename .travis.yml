@@ -2,9 +2,12 @@ language: cpp
 
 matrix:
   include:
+    # -----------------------------------------------------------------------------------
+    # linux gcc-6 with coverage
+
     - os: linux
       dist: trusty
-      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
+      addons: &gcc6 { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
     - os: linux
@@ -12,24 +15,30 @@ matrix:
       addons: { apt: { packages: [g++-6, lcov], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Coverage GCOV=gcov-6
 
+    # -----------------------------------------------------------------------------------
+    # linux gcc-7
+
     - os: linux
       dist: trusty
-      addons: { apt: { packages: [g++-7], sources: [ubuntu-toolchain-r-test] } }
+      addons: &gcc7 { apt: { packages: [g++-7], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Release
 
     - os: linux
       dist: trusty
-      addons: { apt: { packages: [g++-7], sources: [ubuntu-toolchain-r-test] } }
+      addons: *gcc7
       env: MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Debug
+
+    # -----------------------------------------------------------------------------------
+    # linux gcc-8
 
     - os: linux
       dist: trusty
-      addons: { apt: { packages: [g++-8], sources: [ubuntu-toolchain-r-test] } }
+      addons: &gcc8 { apt: { packages: [g++-8], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-8 && CXX=g++-8" BUILD_TYPE=Release
 
     - os: linux
       dist: trusty
-      addons: { apt: { packages: [g++-8], sources: [ubuntu-toolchain-r-test] } }
+      addons: *gcc8
       env: MATRIX_EVAL="CC=gcc-8 && CXX=g++-8" BUILD_TYPE=Debug
 
 before_install:
