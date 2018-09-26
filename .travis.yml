@@ -11,13 +11,13 @@ matrix:
         # There seem to be a conflict between packages oclint and gcc. For now, oclint
         # is forced removed. More information:
         # https://github.com/travis-ci/travis-ci/issues/8826
-        - @osx_remove_oclint PRE_MATRIX_EVAL="brew cask uninstall oclint"
+        - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
     - os: osx
       osx_image: xcode10
       env:
-        - *osx_remove_oclint
+        - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
@@ -26,13 +26,13 @@ matrix:
     - os: osx
       osx_image: xcode10
       env:
-        - *osx_remove_oclint
+        - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@7 && CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Release
 
     - os: osx
       osx_image: xcode10
       env:
-        - *osx_remove_oclint
+        - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@7 && CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
