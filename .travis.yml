@@ -102,7 +102,7 @@ matrix:
     - os: linux
       dist: trusty
       addons: &clang4 { apt: {
-        packages: [clang-4.0, libstdc++-6-dev] ,
+        packages: [clang-4.0, libstdc++-6-dev],
         sources: [ubuntu-toolchain-r-test, llvm-toolchain-trusty-4.0] } }
       env: MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0" BUILD_TYPE=Release
 
@@ -117,7 +117,7 @@ matrix:
     - os: linux
       dist: trusty
       addons: &clang5 { apt: {
-        packages: [clang-5.0, libstdc++-6-dev] ,
+        packages: [clang-5.0, libstdc++-6-dev],
         sources: [ubuntu-toolchain-r-test, llvm-toolchain-trusty-5.0] } }
       env: MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0" BUILD_TYPE=Release
 
@@ -132,7 +132,7 @@ matrix:
     - os: linux
       dist: trusty
       addons: &clang6 { apt: {
-        packages: [clang-6.0, libstdc++-6-dev] ,
+        packages: [clang-6.0, libstdc++-6-dev],
         sources: [ubuntu-toolchain-r-test, llvm-toolchain-trusty-6.0] } }
       env: MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0" BUILD_TYPE=Release
 
