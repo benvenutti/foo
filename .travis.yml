@@ -9,7 +9,8 @@ matrix:
       osx_image: xcode10
       env:
         # There seem to be a conflict between packages oclint and gcc. For now, oclint
-        # is forced removed. More information:
+        # is forced removed. When this is fixed, PRE_MATRIX_EVAL can be removed from
+        # this script. More information:
         # https://github.com/travis-ci/travis-ci/issues/8826
         - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
