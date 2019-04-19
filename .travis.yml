@@ -8,17 +8,11 @@ matrix:
     - os: osx
       osx_image: xcode10
       env:
-        # There seem to be a conflict between packages oclint and gcc. For now, oclint
-        # is forced removed. When this is fixed, PRE_MATRIX_EVAL can be removed from
-        # this script. More information:
-        # https://github.com/travis-ci/travis-ci/issues/8826
-        - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
     - os: osx
       osx_image: xcode10
       env:
-        - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
@@ -27,13 +21,11 @@ matrix:
     - os: osx
       osx_image: xcode10
       env:
-        - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@7 && CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Release
 
     - os: osx
       osx_image: xcode10
       env:
-        - PRE_MATRIX_EVAL="brew cask uninstall oclint"
         - MATRIX_EVAL="brew install gcc@7 && CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
@@ -143,13 +135,14 @@ matrix:
       env: MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0" BUILD_TYPE=Debug
 
 before_install:
-  - eval "${PRE_MATRIX_EVAL}"
   - eval "${MATRIX_EVAL}"
 
 script:
-  - mkdir build && cd build
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
-  - cmake --build .
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+  - cat compile_commands.json
+  - cmake --build . -- -j2
   - ctest -VV .
 
 after_success:
