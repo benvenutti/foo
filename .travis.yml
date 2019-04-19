@@ -3,27 +3,16 @@ language: cpp
 matrix:
   include:
     # -----------------------------------------------------------------------------------
-    # osx gcc-6
-
-    - os: osx
-      osx_image: xcode10
-      env:
-        - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
-
-    - os: osx
-      osx_image: xcode10
-      env:
-        - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Debug
-
-    # -----------------------------------------------------------------------------------
     # osx gcc-7
 
-    - os: osx
+    - name: "osx gcc-7 release"
+      os: osx
       osx_image: xcode10
       env:
         - MATRIX_EVAL="brew install gcc@7 && CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Release
 
-    - os: osx
+    - name: "osx gcc-7 debug"
+      os: osx
       osx_image: xcode10
       env:
         - MATRIX_EVAL="brew install gcc@7 && CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Debug
