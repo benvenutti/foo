@@ -59,34 +59,19 @@ matrix:
       env: BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
-    # linux gcc-6 with coverage
-
-    - name: "linux gcc-6 release"
-      os: linux
-      dist: trusty
-      addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
-      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
-
-    - name: "linux gcc-6 coverage"
-      os: linux
-      dist: trusty
-      addons: { apt: { packages: [g++-6, lcov], sources: [ubuntu-toolchain-r-test] } }
-      env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Coverage GCOV=gcov-6
-
-    # -----------------------------------------------------------------------------------
-    # linux gcc-7
+    # linux gcc-7 (coverage)
 
     - name: "linux gcc-7 release"
       os: linux
       dist: trusty
-      addons: &gcc7 { apt: { packages: [g++-7], sources: [ubuntu-toolchain-r-test] } }
+      addons: { apt: { packages: [g++-7], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Release
 
-    - name: "linux gcc-7 debug"
+    - name: "linux gcc-7 coverage"
       os: linux
       dist: trusty
-      addons: *gcc7
-      env: MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Debug
+      addons: { apt: { packages: [g++-7, lcov], sources: [ubuntu-toolchain-r-test] } }
+      env: MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Coverage GCOV=gcov-7
 
     # -----------------------------------------------------------------------------------
     # linux gcc-8
