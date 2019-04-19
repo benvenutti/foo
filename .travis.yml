@@ -29,6 +29,21 @@ matrix:
         - MATRIX_EVAL="brew install gcc@7 && CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
+    # osx gcc-8
+
+    - name: "osx gcc-8 release"
+      os: osx
+      osx_image: xcode10
+      env:
+        - MATRIX_EVAL="brew install gcc@8 && CC=gcc-8 && CXX=g++-8" BUILD_TYPE=Release
+
+    - name: "osx gcc-8 debug"
+      os: osx
+      osx_image: xcode10
+      env:
+        - MATRIX_EVAL="brew install gcc@8 && CC=gcc-8 && CXX=g++-8" BUILD_TYPE=Debug
+
+    # -----------------------------------------------------------------------------------
     # osx appleclang 9
 
     - os: osx
