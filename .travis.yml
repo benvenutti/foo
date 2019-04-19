@@ -35,34 +35,40 @@ matrix:
     # -----------------------------------------------------------------------------------
     # osx appleclang 9
 
-    - os: osx
+    - name: "osx appleclang 9 release"
+      os: osx
       osx_image: xcode9
       env: BUILD_TYPE=Release
 
-    - os: osx
+    - name: "osx appleclang 9 debug"
+      os: osx
       osx_image: xcode9
       env: BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
     # osx appleclang 10
 
-    - os: osx
+    - name: "osx appleclang 10 release"
+      os: osx
       osx_image: xcode10
       env: BUILD_TYPE=Release
 
-    - os: osx
+    - name: "osx appleclang 10 debug"
+      os: osx
       osx_image: xcode10
       env: BUILD_TYPE=Debug
 
     # -----------------------------------------------------------------------------------
     # linux gcc-6 with coverage
 
-    - os: linux
+    - name: "linux gcc-6 release"
+      os: linux
       dist: trusty
       addons: { apt: { packages: [g++-6], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Release
 
-    - os: linux
+    - name: "linux gcc-6 coverage"
+      os: linux
       dist: trusty
       addons: { apt: { packages: [g++-6, lcov], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-6 && CXX=g++-6" BUILD_TYPE=Coverage GCOV=gcov-6
@@ -70,12 +76,14 @@ matrix:
     # -----------------------------------------------------------------------------------
     # linux gcc-7
 
-    - os: linux
+    - name: "linux gcc-7 release"
+      os: linux
       dist: trusty
       addons: &gcc7 { apt: { packages: [g++-7], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Release
 
-    - os: linux
+    - name: "linux gcc-7 debug"
+      os: linux
       dist: trusty
       addons: *gcc7
       env: MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" BUILD_TYPE=Debug
@@ -83,12 +91,14 @@ matrix:
     # -----------------------------------------------------------------------------------
     # linux gcc-8
 
-    - os: linux
+    - name: "linux gcc-8 release"
+      os: linux
       dist: trusty
       addons: &gcc8 { apt: { packages: [g++-8], sources: [ubuntu-toolchain-r-test] } }
       env: MATRIX_EVAL="CC=gcc-8 && CXX=g++-8" BUILD_TYPE=Release
 
-    - os: linux
+    - name: "linux gcc-8 debug"
+      os: linux
       dist: trusty
       addons: *gcc8
       env: MATRIX_EVAL="CC=gcc-8 && CXX=g++-8" BUILD_TYPE=Debug
@@ -96,14 +106,16 @@ matrix:
     # -----------------------------------------------------------------------------------
     # linux clang-4
 
-    - os: linux
+    - name: "linux clang-4 release"
+      os: linux
       dist: trusty
       addons: &clang4 { apt: {
         packages: [clang-4.0, libstdc++-6-dev],
         sources: [ubuntu-toolchain-r-test, llvm-toolchain-trusty-4.0] } }
       env: MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0" BUILD_TYPE=Release
 
-    - os: linux
+    - name: "linux clang-4 debug"
+      os: linux
       dist: trusty
       addons: *clang4
       env: MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0" BUILD_TYPE=Debug
@@ -111,14 +123,16 @@ matrix:
     # -----------------------------------------------------------------------------------
     # linux clang-5
 
-    - os: linux
+    - name: "linux clang-5 release"
+      os: linux
       dist: trusty
       addons: &clang5 { apt: {
         packages: [clang-5.0, libstdc++-6-dev],
         sources: [ubuntu-toolchain-r-test, llvm-toolchain-trusty-5.0] } }
       env: MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0" BUILD_TYPE=Release
 
-    - os: linux
+    - name: "linux clang-5 debug"
+      os: linux
       dist: trusty
       addons: *clang5
       env: MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0" BUILD_TYPE=Debug
@@ -126,14 +140,16 @@ matrix:
     # -----------------------------------------------------------------------------------
     # linux clang-6
 
-    - os: linux
+    - name: "linux clang-6 release"
+      os: linux
       dist: trusty
       addons: &clang6 { apt: {
         packages: [clang-6.0, libstdc++-6-dev],
         sources: [ubuntu-toolchain-r-test, llvm-toolchain-trusty-6.0] } }
       env: MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0" BUILD_TYPE=Release
 
-    - os: linux
+    - name: "linux clang-6 debug"
+      os: linux
       dist: trusty
       addons: *clang6
       env: MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0" BUILD_TYPE=Debug
